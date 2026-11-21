@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>KOMBO LANGUAGE</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Amiri:wght@400;700&family=Great+Vibes&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#04120d;--bg2:#082219;--card:#0b2a1f;--line:#1c5a42;--g:#22c55e;--g2:#16a34a;--gold:#f5c542;--tx:#eafaf1;--mu:#8fb7a3;--en:#3b82f6;--ar:#22c55e;--ul:#f59e0b;--li:#c084fc;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 *{box-sizing:border-box;margin:0}
@@ -186,15 +186,25 @@ details.add summary{cursor:pointer;padding:12px 0;font-size:14px;font-weight:600
 details.add summary::before{content:"+ ";color:var(--g)}
 details.add[open] summary::before{content:"– "}
 @media(max-width:860px){.gk{grid-template-columns:repeat(2,1fr)}.vf{grid-template-columns:1fr}.adm2{padding:16px}}
+
+/* === KOMBO: jam + ikon melayang === */
+.kclock{display:flex;flex-direction:column;align-items:flex-end;line-height:1.15;padding:6px 14px;border-radius:14px;white-space:nowrap}
+.kclock b{font-size:19px;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:.5px}
+.kclock small{font-size:11px;opacity:.75}
+#kfloat{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:50}
+.kf{position:absolute;opacity:0;white-space:nowrap;animation:kfUp linear forwards;will-change:transform,opacity}
+.kf-w{padding:5px 14px;border-radius:999px;font-size:13px;font-weight:600;backdrop-filter:blur(4px)}
+@keyframes kfUp{0%{opacity:0;transform:translate(0,20px) scale(.3) rotate(var(--r))}10%{opacity:.95;transform:translate(0,0) scale(1.15) rotate(var(--r))}16%{transform:scale(1) rotate(var(--r))}75%{opacity:.8}100%{opacity:0;transform:translate(var(--dx),-42vh) scale(1) rotate(calc(var(--r)*-1))}}
+@media(max-width:640px){.kclock small{display:none}.kclock b{font-size:16px}}
+
+.kclock{background:#0d2e22;border:1px solid var(--line)}
+.kclock b{color:var(--gold)}
+.kf-w{background:#0c3024cc;border:1px solid var(--line);color:var(--tx)}
+.kf-w.ar{font-family:Amiri,serif;font-size:18px;color:var(--g)}
+.kceo{margin:34px auto 6px;text-align:center;display:flex;flex-direction:column;align-items:center}
+.kceo small{font-size:11px;font-weight:600;letter-spacing:.5em;padding-left:.5em;color:#f5c542}
+.kceo span{font-family:'Great Vibes','Brush Script MT',cursive;font-size:44px;line-height:1.15;background:linear-gradient(90deg,#f5c542,#fff3c4,#f5c542);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 12px #f5c54240)}
 </style>
-<meta name="theme-color" content="#04120d">
-<link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="KOMBO LANGUAGE">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 </head>
 <body>
 <div id="splash" role="dialog" aria-label="Pembuka KOMBO LANGUAGE">
@@ -222,6 +232,7 @@ details.add[open] summary::before{content:"– "}
 <header>
  <div class="logo" onclick="go('admin')"><svg viewBox="0 0 48 48" fill="none" stroke="#e8fff2" stroke-width="2.2" stroke-linejoin="round"><path d="M4 18l20-6 20 6v22l-20-6-20 6z"/><path d="M24 12v22"/><path d="M24 4c-5 3-5 8 0 10 5-2 5-7 0-10z" fill="#22c55e" stroke="none"/></svg><div><b>KOMBO LANGUAGE</b><small>Sistem Pembelajaran Bahasa Pesantren</small></div></div>
  <nav class="top" id="topnav"></nav>
+ <div class="kclock" title="Waktu saat ini"><b id="kcT">--:--:--</b><small id="kcD"></small></div>
  <button class="btn" id="logoutBtn" onclick="logout()">Keluar</button>
 </header>
 
@@ -314,7 +325,9 @@ details.add[open] summary::before{content:"– "}
  <button class="btn p" onclick="login()">Masuk</button>
  <p class="mu" style="margin-top:12px;font-size:12px">Belum punya akun? <span style="color:var(--g)">Hubungi admin untuk didaftarkan.</span></p>
 </div></section>
+<div class="kceo"><small>CEO</small><span>Latif</span></div>
 </div>
+<div id="kfloat" aria-hidden="true"></div>
 <nav class="bot" id="botnav"></nav>
 <div id="toast"></div>
 
@@ -387,6 +400,34 @@ function end(){if(done)return;done=1;s.classList.add("out");setTimeout(function(
 setTimeout(end,5900);document.getElementById("spSkip").onclick=end;
 })();
 </script>
-<script>document.getElementById("p").addEventListener("keydown",function(e){if(e.key=="Enter")login()});document.getElementById("u").addEventListener("keydown",function(e){if(e.key=="Enter")login()})</script><script>renderM()</script><script>if('serviceWorker' in navigator)addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){})});</script>
+<script>document.getElementById("p").addEventListener("keydown",function(e){if(e.key=="Enter")login()});document.getElementById("u").addEventListener("keydown",function(e){if(e.key=="Enter")login()})</script><script>renderM()</script>
+<script>
+/* === KOMBO: jam digital + ikon/tulisan melayang === */
+(function(){
+ var pad=function(n){return(n<10?'0':'')+n};
+ var H=['Min','Sen','Sel','Rab','Kam','Jum','Sab'],B=['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
+ function zona(d){var o=-d.getTimezoneOffset()/60;return o===7?'WIB':o===8?'WITA':o===9?'WIT':'GMT'+(o>=0?'+':'')+o}
+ function tick(){
+  var d=new Date(),t=document.getElementById('kcT'),s=document.getElementById('kcD');
+  if(t)t.textContent=pad(d.getHours())+':'+pad(d.getMinutes())+':'+pad(d.getSeconds());
+  if(s)s.textContent=H[d.getDay()]+', '+d.getDate()+' '+B[d.getMonth()]+' '+d.getFullYear()+' · '+zona(d);
+ }
+ tick();setInterval(tick,1000);
+ var ITEMS=[{i:"📖"},{i:"✨"},{i:"🕌"},{i:"🌙"},{i:"🎓"},{i:"💡"},{i:"🌟"},{i:"ع"},{i:"A"},{t:"Hello 👋"},{t:"مرحبا"},{t:"Kosakata"},{t:"Learn"},{t:"تعلم"},{t:"Smart Knowledge"},{t:"Belajar Bahasa"},{t:"Mufrodat"},{t:"Keep going!"},{t:"Latif · CEO"},{t:"Kombo Language"}];
+ var layer=document.getElementById('kfloat');
+ if(!layer||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+ function spawn(){
+  if(document.hidden||layer.children.length>9)return;
+  var it=ITEMS[Math.floor(Math.random()*ITEMS.length)],e=document.createElement('span');
+  e.className='kf '+(it.t?'kf-w':'kf-i')+(it.t&&/[\u0600-\u06FF]/.test(it.t)?' ar':'');
+  e.textContent=it.t||it.i;
+  var dur=7+Math.random()*5;
+  e.style.cssText='left:'+(4+Math.random()*88)+'%;bottom:'+(6+Math.random()*30)+'%;--r:'+(Math.random()*30-15)+'deg;--dx:'+(Math.random()*80-40)+'px;animation-duration:'+dur+'s;'+(it.i&&!it.t?'font-size:'+(22+Math.random()*18)+'px':'');
+  layer.appendChild(e);
+  setTimeout(function(){e.remove()},dur*1000+100);
+ }
+ setInterval(spawn,1500);setTimeout(spawn,600);setTimeout(spawn,1100);
+})();
+</script>
 </body>
 </html>
