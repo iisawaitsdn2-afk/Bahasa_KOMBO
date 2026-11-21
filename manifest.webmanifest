@@ -1,0 +1,18 @@
+{
+  "id": "./",
+  "name": "KOMBO LANGUAGE",
+  "short_name": "KOMBO LANG",
+  "description": "Belajar Bahasa Inggris dan Arab: kosa kata harian, jadwal, dan dashboard santri.",
+  "lang": "id",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#04120d",
+  "theme_color": "#04120d",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
